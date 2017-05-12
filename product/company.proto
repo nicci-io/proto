@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package proto;
+
+service CompanyService {
+    rpc GetCompanies(CompanyListOptions) returns (CompanyList) {}
+    rpc GetCompany(CompanyOptions) returns (Company) {}
+    rpc CreateCompany(Company) returns (Company) {}
+    rpc EditCompany(Company) returns (Company) {}
+    rpc DeleteCompany(CompanyOptions) returns (Company) {}
+}
+
+message CompanyOptions {
+    string id = 1;
+    string name = 2;
+}
+
+message CompanyListOptions {
+    string name = 1;
+}
+
+message CompanyList {
+    repeated Company companies = 1;
+}
+
+message Company {
+    string id = 1;
+    string name = 2;
+    string postalcode = 3;
+    int32  houseNumber = 4;
+    string houseNumberAddition = 5;
+    string street = 6;
+    string phoneNumber = 7;
+    int32  kvkNumber = 8;
+    string btwNumber = 9;
+    string faxNumber = 10;
+    bytes  logo = 11;
+    string emailaddress = 12;
+}

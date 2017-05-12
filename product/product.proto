@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package proto;
+
+service ProductService {
+    rpc GetProducts(ProductListOptions) returns (ProductList) {}
+    rpc GetProduct(ProductOptions) returns (Product) {}
+    rpc CreateProduct(Product) returns (Product) {}
+    rpc EditProduct(Product) returns (Product) {}
+    rpc DeleteProduct(ProductOptions) returns (Product) {}
+}
+
+message ProductOptions {
+    string id = 1;
+}
+
+message ProductListOptions {
+    string name = 1;
+}
+
+message ProductList {
+    repeated Product products = 1;
+}
+
+message Product {
+    string id = 1;
+    string name = 2;
+    string postalcode = 3;
+    int32  houseNumber = 4;
+    string houseNumberAddition = 5;
+    string phoneNumber = 6;
+    string website = 7;
+    string remarks = 8;
+    string companyId = 9;
+    string productTypeId = 10;
+}
