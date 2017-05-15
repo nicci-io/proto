@@ -1,0 +1,11 @@
+{
+  "name": "@nicci/protobuf",
+  "version": "0.1.0",
+  "author": "Newest Industry",
+  "description": "NICCI.io protobuf files",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicci-io/proto.git"
+  }
+}
