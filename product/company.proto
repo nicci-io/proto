@@ -30,10 +30,11 @@ message Company {
     int32  houseNumber = 4;
     string houseNumberAddition = 5;
     string street = 6;
-    string phoneNumber = 7;
-    int32  kvkNumber = 8;
-    string btwNumber = 9;
-    string faxNumber = 10;
-    bytes  logo = 11;
-    string emailaddress = 12;
+    string city = 7;
+    string phoneNumber = 8;
+    int32  kvkNumber = 9;
+    string btwNumber = 10;
+    string faxNumber = 11;
+    bytes  logo = 12;
+    string emailaddress = 13;
 }
