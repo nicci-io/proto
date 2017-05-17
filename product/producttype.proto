@@ -1,13 +1,37 @@
 syntax = "proto3";
 
-package proto;
+package nicci_product_proto;
+
+import "google/api/annotations.proto";
 
 service ProductTypeService {
-    rpc GetProductTypes(ProductTypeListOptions) returns (ProductTypeList) {}
-    rpc GetProductType(ProductTypeOptions) returns (ProductType) {}
-    rpc CreateProductType(ProductType) returns (ProductType) {}
-    rpc EditProductType(ProductType) returns (ProductType) {}
-    rpc DeleteProductType(ProductTypeOptions) returns (ProductType) {}
+    rpc GetProductTypes(ProductTypeListOptions) returns (ProductTypeList) {
+        option (google.api.http) = {
+          get: "/producttypes"
+        };
+    }
+    rpc GetProductType(ProductTypeOptions) returns (ProductType) {
+        option (google.api.http) = {
+          get: "/producttypes/{id}"
+        };
+    }
+    rpc CreateProductType(ProductType) returns (ProductType) {
+        option (google.api.http) = {
+          post: "/producttypes"
+          body: "*"
+        };
+    }
+    rpc EditProductType(ProductType) returns (ProductType) {
+        option (google.api.http) = {
+          put: "/producttypes/{id}"
+          body: "*"
+        };
+    }
+    rpc DeleteProductType(ProductTypeOptions) returns (ProductType) {
+        option (google.api.http) = {
+          delete: "/producttypes/{id}"
+        };
+    }
 }
 
 message ProductTypeOptions {

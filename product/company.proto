@@ -1,13 +1,37 @@
 syntax = "proto3";
 
-package proto;
+package nicci_product_proto;
+
+import "google/api/annotations.proto";
 
 service CompanyService {
-    rpc GetCompanies(CompanyListOptions) returns (CompanyList) {}
-    rpc GetCompany(CompanyOptions) returns (Company) {}
-    rpc CreateCompany(Company) returns (Company) {}
-    rpc EditCompany(Company) returns (Company) {}
-    rpc DeleteCompany(CompanyOptions) returns (Company) {}
+    rpc GetCompanies (CompanyListOptions) returns (CompanyList) {
+        option (google.api.http) = {
+          get: "/companies"
+        };
+    }
+    rpc GetCompany (CompanyOptions) returns (Company) {
+        option (google.api.http) = {
+          get: "/companies/{id}"
+        };
+    }
+    rpc CreateCompany (Company) returns (Company) {
+        option (google.api.http) = {
+          post: "/companies"
+          body: "*"
+        };
+    }
+    rpc EditCompany (Company) returns (Company) {
+        option (google.api.http) = {
+          put: "/companies/{id}"
+          body: "*"
+        };
+    }
+    rpc DeleteCompany (CompanyOptions) returns (Company) {
+        option (google.api.http) = {
+          delete: "/companies/{id}"
+        };
+    }
 }
 
 message CompanyOptions {
@@ -26,15 +50,15 @@ message CompanyList {
 message Company {
     string id = 1;
     string name = 2;
-    string postalcode = 3;
-    int32  houseNumber = 4;
+    string postalCode = 3;
+    int32 houseNumber = 4;
     string houseNumberAddition = 5;
     string street = 6;
     string city = 7;
     string phoneNumber = 8;
-    int32  kvkNumber = 9;
+    int32 kvkNumber = 9;
     string btwNumber = 10;
     string faxNumber = 11;
-    bytes  logo = 12;
-    string emailaddress = 13;
+    bytes logo = 12;
+    string emailAddress = 13;
 }

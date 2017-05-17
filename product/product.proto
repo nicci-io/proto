@@ -1,13 +1,42 @@
 syntax = "proto3";
 
-package proto;
+package nicci_product_proto;
+
+import "google/api/annotations.proto";
 
 service ProductService {
-    rpc GetProducts(ProductListOptions) returns (ProductList) {}
-    rpc GetProduct(ProductOptions) returns (Product) {}
-    rpc CreateProduct(Product) returns (Product) {}
-    rpc EditProduct(Product) returns (Product) {}
-    rpc DeleteProduct(ProductOptions) returns (Product) {}
+    rpc GetProducts(ProductListOptions) returns (ProductList) {
+        option (google.api.http) = {
+          get: "/products"
+        };
+    }
+    rpc GetProductsByCompanyId(ProductListOptions) returns (ProductList) {
+        option (google.api.http) = {
+          get: "/products/company/{companyId}"
+        };
+    }
+    rpc GetProduct(ProductOptions) returns (Product) {
+        option (google.api.http) = {
+          get: "/products/{id}"
+        };
+    }
+    rpc CreateProduct(Product) returns (Product) {
+        option (google.api.http) = {
+          post: "/products"
+          body: "*"
+        };
+    }
+    rpc EditProduct(Product) returns (Product) {
+        option (google.api.http) = {
+          put: "/products/{id}"
+          body: "*"
+        };
+    }
+    rpc DeleteProduct(ProductOptions) returns (Product) {
+        option (google.api.http) = {
+          delete: "/products/{id}"
+        };
+    }
 }
 
 message ProductOptions {
@@ -15,7 +44,7 @@ message ProductOptions {
 }
 
 message ProductListOptions {
-    string name = 1;
+    string companyId = 1;
 }
 
 message ProductList {
@@ -25,7 +54,7 @@ message ProductList {
 message Product {
     string id = 1;
     string name = 2;
-    string postalcode = 3;
+    string postalCode = 3;
     int32  houseNumber = 4;
     string houseNumberAddition = 5;
     string street = 6;
