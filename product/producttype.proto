@@ -4,29 +4,35 @@ package nicci_product_proto;
 
 import "google/api/annotations.proto";
 
+// The ProductTypeService handles the generation and checking of product types
 service ProductTypeService {
+    // GetProductTypes retrieves all product types based on the given ProductTypeListOptions
     rpc GetProductTypes(ProductTypeListOptions) returns (ProductTypeList) {
         option (google.api.http) = {
           get: "/producttypes"
         };
     }
+    // GetProductType retrieves a single product type based on the given ProductTypeOptions
     rpc GetProductType(ProductTypeOptions) returns (ProductType) {
         option (google.api.http) = {
           get: "/producttypes/{id}"
         };
     }
+    // CreateProductType creates a single product type
     rpc CreateProductType(ProductType) returns (ProductType) {
         option (google.api.http) = {
           post: "/producttypes"
           body: "*"
         };
     }
+    // EditProductType edits a single product type by supplied identifier
     rpc EditProductType(ProductType) returns (ProductType) {
         option (google.api.http) = {
           put: "/producttypes/{id}"
           body: "*"
         };
     }
+    // DeleteProductType deletes a single product type permanently
     rpc DeleteProductType(ProductTypeOptions) returns (ProductType) {
         option (google.api.http) = {
           delete: "/producttypes/{id}"
@@ -34,23 +40,35 @@ service ProductTypeService {
     }
 }
 
+// ProductTypeOptions is the query options object for querying the rpc methods related to a single product type
 message ProductTypeOptions {
+    // Is the product type identifier
     string id = 1;
+    // Is the name of the product type
     string name = 2;
+    // Is the category of the product type
     string category = 3;
 }
 
+// ProductTypeListOptions is the query options object for querying the rpc methods related to a list of product types
 message ProductTypeListOptions {
-    string name = 2;
-    string category = 3;
+    // Is the name of the product type
+    string name = 1;
+    // Is the category of the product type
+    string category = 2;
 }
 
+// ProductTypeList is a list of product types
 message ProductTypeList {
     repeated ProductType productTypes = 1;
 }
 
+// ProductType described the rpc method requests OR responses.
 message ProductType {
+    // Is the product type identifier
     string id = 1;
+    // Is the name of the product type
     string name = 2;
+    // Is the category of the product type
     string category = 3;
 }

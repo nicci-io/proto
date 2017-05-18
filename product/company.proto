@@ -4,29 +4,35 @@ package nicci_product_proto;
 
 import "google/api/annotations.proto";
 
+// The CompanyService handles the generation and checking of companies
 service CompanyService {
+    // GetCompanies retrieves all companies based on the given CompanyListOptions
     rpc GetCompanies (CompanyListOptions) returns (CompanyList) {
         option (google.api.http) = {
           get: "/companies"
         };
     }
+    // GetCompany retrieves a single company based on the given CompanyOptions
     rpc GetCompany (CompanyOptions) returns (Company) {
         option (google.api.http) = {
           get: "/companies/{id}"
         };
     }
+    // CreateCompany creates a single company
     rpc CreateCompany (Company) returns (Company) {
         option (google.api.http) = {
           post: "/companies"
           body: "*"
         };
     }
+    // EditCompany edits a single company by supplied identifier
     rpc EditCompany (Company) returns (Company) {
         option (google.api.http) = {
           put: "/companies/{id}"
           body: "*"
         };
     }
+    // DeleteCompany deletes a single company permanently
     rpc DeleteCompany (CompanyOptions) returns (Company) {
         option (google.api.http) = {
           delete: "/companies/{id}"
@@ -34,31 +40,51 @@ service CompanyService {
     }
 }
 
+// CompanyOptions is the query options object for querying the rpc methods related to a single company
 message CompanyOptions {
+    // Is the company identifier
     string id = 1;
+    // Is the name of the company
     string name = 2;
 }
 
+// CompanyListOptions is the query options object for querying the rpc methods related to a list of companies
 message CompanyListOptions {
+    // Is the name of the company
     string name = 1;
 }
 
+// CompanyList is a list of companies
 message CompanyList {
     repeated Company companies = 1;
 }
 
+// Company described the rpc method requests OR responses.
 message Company {
+    // Is the company identifier
     string id = 1;
+    // Is the name of the company
     string name = 2;
+    // Is the postal code of the company (Dutch postalcodes)
     string postalCode = 3;
+    // Is the house number of the company
     int32 houseNumber = 4;
+    // Is the house number addition of the company
     string houseNumberAddition = 5;
+    // Is the street of the company
     string street = 6;
+    // Is the city of the company
     string city = 7;
+    // Is the phone number of the company
     string phoneNumber = 8;
+    // Is the KvK identification number of the company (Kamer van Koophandel)
     int32 kvkNumber = 9;
+    // Is the BTW identification number of the company
     string btwNumber = 10;
+    // Is the fax number of the company
     string faxNumber = 11;
+    // Is the companies logo
     bytes logo = 12;
+    // Is the emailaddress of the company
     string emailAddress = 13;
 }
