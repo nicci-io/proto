@@ -63,7 +63,7 @@ message ProductList {
     repeated Product products = 1;
 }
 
-// Product described the rpc method requests OR responses.
+// Product describes the rpc method requests OR responses.
 message Product {
     // Is the product identifier
     string id = 1;

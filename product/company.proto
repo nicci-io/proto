@@ -3,6 +3,7 @@ syntax = "proto3";
 package nicci_product_proto;
 
 import "google/api/annotations.proto";
+import "file.proto";
 
 // The CompanyService handles the generation and checking of companies
 service CompanyService {
@@ -59,7 +60,7 @@ message CompanyList {
     repeated Company companies = 1;
 }
 
-// Company described the rpc method requests OR responses.
+// Company describes the rpc method requests OR responses.
 message Company {
     // Is the company identifier
     string id = 1;
@@ -84,7 +85,7 @@ message Company {
     // Is the fax number of the company
     string faxNumber = 11;
     // Is the companies logo
-    bytes logo = 12;
+    File logo = 12;
     // Is the emailaddress of the company
     string emailAddress = 13;
 }

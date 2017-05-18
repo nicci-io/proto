@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package nicci_product_proto;
+
+// File describes a base64 encoded file
+message File {
+    // Filename as uploaded
+    string name = 1;
+    // Mimetype of file
+    string mimeType = 2;
+    // Size of file in bytes
+    int32  size = 3;
+    // Base64 encoded file
+    bytes  base64 = 4;
+}
