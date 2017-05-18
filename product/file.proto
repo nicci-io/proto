@@ -10,6 +10,6 @@ message File {
     string mimeType = 2;
     // Size of file in bytes
     int32  size = 3;
-    // Base64 encoded file
-    bytes  base64 = 4;
+    // File content
+    bytes  content = 4;
 }
