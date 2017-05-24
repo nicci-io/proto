@@ -1,38 +1,92 @@
 syntax = "proto3";
 
-package proto;
+package nicci_product_proto;
 
+import "google/api/annotations.proto";
+
+// The ProductService handles the generation and checking of products
 service ProductService {
-    rpc GetProducts(ProductListOptions) returns (ProductList) {}
-    rpc GetProduct(ProductOptions) returns (Product) {}
-    rpc CreateProduct(Product) returns (Product) {}
-    rpc EditProduct(Product) returns (Product) {}
-    rpc DeleteProduct(ProductOptions) returns (Product) {}
+    // GetProducts retrieves all products based on the given ProductListOptions
+    rpc GetProducts(ProductListOptions) returns (ProductList) {
+        option (google.api.http) = {
+          get: "/products"
+        };
+    }
+    // GetProductsByCompanyId retrieves all products based on the given company identifier
+    rpc GetProductsByCompanyId(ProductListOptions) returns (ProductList) {
+        option (google.api.http) = {
+          get: "/products/company/{companyId}"
+        };
+    }
+    // GetProduct retrieves a single product based on the given ProductOptions
+    rpc GetProduct(ProductOptions) returns (Product) {
+        option (google.api.http) = {
+          get: "/products/{id}"
+        };
+    }
+    // CreateProduct creates a single product
+    rpc CreateProduct(Product) returns (Product) {
+        option (google.api.http) = {
+          post: "/products"
+          body: "*"
+        };
+    }
+    // EditProduct edits a single product by supplied identifier
+    rpc EditProduct(Product) returns (Product) {
+        option (google.api.http) = {
+          put: "/products/{id}"
+          body: "*"
+        };
+    }
+    // DeleteProduct deletes a single product permanently
+    rpc DeleteProduct(ProductOptions) returns (Product) {
+        option (google.api.http) = {
+          delete: "/products/{id}"
+        };
+    }
 }
 
+// ProductOptions is the query options object for querying the rpc methods related to a single product
 message ProductOptions {
+    // Is the product identifier
     string id = 1;
 }
 
+// ProductListOptions is the query options object for querying the rpc methods related to a list of products
 message ProductListOptions {
-    string name = 1;
+    // Is the identifier of the company to which this product is attached
+    string companyId = 1;
 }
 
+// ProductList is a list of products
 message ProductList {
     repeated Product products = 1;
 }
 
+// Product describes the rpc method requests OR responses.
 message Product {
+    // Is the product identifier
     string id = 1;
+    // Is the name of the product
     string name = 2;
-    string postalcode = 3;
+    // Is the postal code of the product
+    string postalCode = 3;
+    // Is the house number of the product
     int32  houseNumber = 4;
+    // Is the house number addition of the product
     string houseNumberAddition = 5;
+    // Is the street of the product
     string street = 6;
+    // Is the city of the product
     string city = 7;
+    // Is the phone number of the product
     string phoneNumber = 8;
+    // Is the website of the product
     string website = 9;
+    // Contains any remarks about the product
     string remarks = 10;
+    // Is the company identifier of the company to which this product is attached
     string companyId = 11;
+    // Is the product type identifier of the product type to which this product is attached
     string productTypeId = 12;
 }
